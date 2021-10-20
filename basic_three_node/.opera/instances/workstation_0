@@ -1,0 +1,30 @@
+{
+  "tosca_name": {
+    "is_set": true,
+    "data": "workstation"
+  },
+  "tosca_id": {
+    "is_set": true,
+    "data": "workstation_0"
+  },
+  "state": {
+    "is_set": true,
+    "data": "started"
+  },
+  "private_address": {
+    "is_set": true,
+    "data": "localhost"
+  },
+  "public_address": {
+    "is_set": true,
+    "data": "localhost"
+  },
+  "networks": {
+    "is_set": false,
+    "data": null
+  },
+  "ports": {
+    "is_set": false,
+    "data": null
+  }
+}

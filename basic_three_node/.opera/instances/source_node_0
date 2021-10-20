@@ -1,0 +1,39 @@
+{
+  "tosca_name": {
+    "is_set": true,
+    "data": "source_node"
+  },
+  "tosca_id": {
+    "is_set": true,
+    "data": "source_node_0"
+  },
+  "state": {
+    "is_set": true,
+    "data": "started"
+  },
+  "component_version": {
+    "is_set": false,
+    "data": null
+  },
+  "admin_credential": {
+    "is_set": false,
+    "data": null
+  },
+  "json_file": {
+    "is_set": true,
+    "data": {
+      "get_artifact": [
+        "SELF",
+        "json_file"
+      ]
+    }
+  },
+  "rest_api_attribute": {
+    "is_set": true,
+    "data": "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv"
+  },
+  "my_json_file_attribute": {
+    "is_set": true,
+    "data": "username,firstname,lastname,password\njsmith,John,Smith,p@ssw3rd\njanesmith,Jane,Smith,s3cret\njoesmith,Joe,Smith,blackd0g\njimsmith,Jim,Smith,wh1it3cAt\njacksmith,Jack,Smith,blu3FisH\njohndoe,John,Doe,R3dHors3\njanedoe,Jane,Doe,GreenFr0g\nmsanders,Michael,Sanders,YellowTurtle\nboballen,Bob,Allen,PurpleSnake\njamesq,James,Quimbly,PinkPig\nmscott,Michael,Scott,WhiteZebra\njhalprin,Jim,Halprin,BlackTurkey\ntjones,Teresa,Jones,BlueHawk\ntomjones,Tommy,Jones,GreenTree\ngreggjones,Gregg,Jones,OrangeFish\ndthompson,Daniel,Thompson,RedBoat\npjones,Pamela,Jones,BlackSnake\nfsmith,Fred,Smith,WhiteHorse\nfransmith,Fran,Smith,YellowDuck\ncthompson,Chris,Thompson,BlueEel"
+  }
+}

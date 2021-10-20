@@ -1,0 +1,83 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+# write the attributes of the source node.
+    - name: Output the source URI to json 
+      copy: 
+        dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/files/source_api.json
+        content: "{'output_src_URI': '{{link_for_download}}'}"
+
+
+    # - name: See what's in that linked text file
+      # command: "python {{ text_file_artifact }}"
+      # register: text_file_contents
+
+    # - name: See what's in that linked text file
+    #   # command: "cat {{ text_file_artifact }}"
+    #   # register: text_file_contents
+
+    # - name: Set text file attribute
+      # set_stats:
+      #   data:
+      #     my_text_file_attribute: "{{ text_file_contents.stdout }}"
+
+    - name: See what's in that linked JSON file
+      command: "cat {{ json_file_artifact }}"
+      register: json_file_contents
+
+    - name: Set JSON file attribute
+      set_stats:
+        data:
+          my_json_file_attribute: "{{ json_file_contents.stdout }}"
+
+    - name: Download demo input data
+      get_url:
+        url: "{{link_for_download}}"
+        dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/files/metadata.csv
+        mode: '0777'
+
+
+
+
+    - name: Create Dockerfile
+      copy:
+        dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/Dockerfile
+        content: > 
+          #Image for source node
+
+          FROM ubuntu 
+          
+          # MAINTAINER gudablessed@gmail.com 
+
+          RUN apt-get update 
+
+          RUN apt-get install -y curl
+
+          RUN curl  {{link_for_download}}
+
+          CMD [ "sh", "-c", "cat metadata.json" ]
+
+
+    - name: build container image
+      docker_image:
+        name: sourcecontainer:v1.0
+        source: build
+        build:
+          path: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/
+        state: present
+
+
+    - name: archive container image as a tarball
+      docker_image:
+        name: sourcecontainer:v1.0
+        archive_path: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/sourcecontainer_v1_0.tar
+        source: pull
+        state: present
+
+    - name: load container from tarball
+      docker_image:
+        name: sourcecontainer:v1.0
+        load_path: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/sourcecontainer_v1_0.tar
+        state: present
+        source: load

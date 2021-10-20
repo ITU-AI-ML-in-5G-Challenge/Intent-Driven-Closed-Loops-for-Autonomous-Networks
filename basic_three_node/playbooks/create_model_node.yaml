@@ -1,0 +1,74 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  - name: Output the model URI to json 
+    copy: 
+      dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/files/model_api.json
+      content: "{'output_model_URI': '{{link_for_download_2}}'}"
+
+
+  
+  - name: Download h5 model through REST API and save.
+    get_url:
+      url: "{{link_for_download_2}}"
+      dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/files/model.h5
+      mode: '0777'
+#only the structure of model node, only the attributes of the node
+  - shell: cat /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/service.yaml
+    register: result
+
+  - set_fact:
+      myvar: "{{ result.stdout | from_yaml | to_json }}"
+
+  - copy:
+      content: "{{ myvar }}"
+      dest:   /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/service.json
+
+
+
+
+
+
+
+  - name: Create Dockerfile
+    copy:
+      dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/Dockerfile
+      content: > 
+        #Image for source node
+
+        FROM ubuntu 
+        
+        # MAINTAINER gudablessed@gmail.com 
+
+        RUN apt-get update 
+
+        RUN apt-get install -y curl
+
+        RUN curl  {{link_for_download_2}}
+
+    
+
+
+  - name: build container image
+    docker_image:
+      name: modelcontainer:v1.0
+      source: build
+      build:
+        path: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/
+      state: present
+
+
+  - name: archive container image as a tarball
+    docker_image:
+      name: modelcontainer:v1.0
+      archive_path: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/modelcontainer_v1_0.tar
+      source: pull
+      state: present
+
+  - name: load container from tarball
+    docker_image:
+      name: modelcontainer:v1.0
+      load_path: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/playbooks/modelcontainer_v1_0.tar
+      state: present
+      source: load

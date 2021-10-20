@@ -1,0 +1,170 @@
+---
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  data_node:
+    derived_from: tosca.nodes.SoftwareComponent
+    attributes:
+      rest_api_attribute:
+        description: Rest API to fetch data 
+        type: string
+        default: "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv"       
+        # default: "http://localhost:8080/data1.csv"     
+      my_json_file_attribute:
+        description: demo JSON file contents attribute
+        type: string
+    properties:
+      json_file:
+        description: JSON file path
+        type: string
+    interfaces:
+      Standard:
+        operations:
+          create:
+            implementation: playbooks/create.yaml
+            inputs:
+              link_for_download:
+                type: string
+                default: {get_attribute: [SELF, rest_api_attribute]}
+              json_file_artifact:
+                description: JSON file artifact input
+                type: string
+                default: { get_property: [ SELF, json_file ] }
+
+  sink_data_node:
+    derived_from: tosca.nodes.SoftwareComponent
+    attributes:
+      rest_api_attribute:
+        description: Rest API to post settings
+        type: string
+        # default: "http://127.0.0.1:5000/data"
+        default: "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv"
+      my_json_file_attribute:
+        description: demo JSON file contents attribute
+        type: string
+    properties:
+      json_file:
+        description: JSON file path
+        type: string
+    interfaces:
+      Standard:
+        operations:
+          create:
+            implementation: playbooks/create_sink_node.yaml
+            inputs:
+              link_for_download:
+                type: string
+                default: {get_attribute: [SELF, rest_api_attribute]}
+              json_file_artifact:
+                description: JSON file artifact input
+                type: string
+                default: { get_property: [ SELF, json_file ] }
+
+
+
+  model_node:
+    derived_from: tosca.nodes.SoftwareComponent
+    attributes:
+      download_model:
+        description: URL to download ML model
+        type: string
+        default: "https://github.com/Shahnawax/HAR-CNN-Keras/blob/master/model.h5"     
+        # default: "http://127.0.0.1:5000/model"     
+        # default: "http://localhost:8080/model1"     
+      catalogid:
+        description: catalog ID
+        type: string
+        default: "0"
+      revisionid:
+        description: revision ID
+        type: string
+        default: "0"
+      solutionid:
+        description: solution ID
+        type: string
+        default: "0"
+    interfaces:
+      Standard:
+        operations:
+          create:
+            implementation: playbooks/create_model_node.yaml
+            inputs:
+              link_for_download_2:
+                type: string
+                default: {get_attribute: [SELF, download_model]}
+ 
+  
+
+topology_template:
+  node_templates:
+    source_node:
+      type: data_node
+      properties:
+        json_file: { get_artifact: [ SELF, json_file ] }
+      artifacts:
+        json_file:
+          type: tosca.artifacts.File
+          file: files/metadata.csv # not needed change to metadata.csv 3vs bits/s, volume of data, type of data
+
+    ml_node:
+      type: model_node
+      requirements:
+        - dependency: source_node
+        - host: workstation
+      
+    workstation:
+      type: tosca.nodes.Compute
+      # capabilities:
+        # Host container properties
+      attributes:
+        public_address: localhost
+        private_address: localhost
+              
+        # host:
+        #   properties:
+        #     num_cpus: 4
+        #     disk_size: 1000 GB
+        #     mem_size: 12288 MB
+            # Guest Operating System properties
+     
+
+
+ 
+
+    sink_node:
+      type: sink_data_node
+      properties:
+        json_file: { get_artifact: [ SELF, json_file ] }
+      artifacts:
+        json_file:
+          type: tosca.artifacts.File
+          file: files/prediction.json
+      requirements:
+        - dependency: ml_node
+   
+  
+
+
+  outputs:
+    output_src_URI:
+      description: Rest API to fetch data
+      value: { get_attribute: [ source_node, rest_api_attribute ] }
+    output_attribute_json_file:
+      description: Sample source data 
+      value: { get_attribute: [ source_node, my_json_file_attribute ] }
+    output_solution_id:
+      description: Solution ID
+      value: { get_attribute: [ ml_node, solutionid ] }
+    
+    output_catalog_id:
+      description: Catalog ID
+      value: { get_attribute: [ ml_node, catalogid] }
+
+    output_revision_id:
+      description: Revision ID
+      value: { get_attribute: [ ml_node, revisionid ] }
+
+    output_sink_uri:
+      description: Sink REST API to set values
+      value: { get_attribute: [ sink_node, rest_api_attribute ] } #url to .
+

@@ -1,0 +1,14 @@
+{
+  "tosca_name": {
+    "is_set": true,
+    "data": "sink_node-dependency-ml_node"
+  },
+  "tosca_id": {
+    "is_set": true,
+    "data": "sink_node_0--ml_node_0"
+  },
+  "state": {
+    "is_set": true,
+    "data": "initial"
+  }
+}

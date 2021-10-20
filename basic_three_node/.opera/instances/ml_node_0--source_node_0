@@ -1,0 +1,14 @@
+{
+  "tosca_name": {
+    "is_set": true,
+    "data": "ml_node-dependency-source_node"
+  },
+  "tosca_id": {
+    "is_set": true,
+    "data": "ml_node_0--source_node_0"
+  },
+  "state": {
+    "is_set": true,
+    "data": "initial"
+  }
+}
