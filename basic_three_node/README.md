@@ -15,6 +15,7 @@ To run the example, make sure the xopera orchestrator is installed
 
 Note:
   Ensure that all the directory paths are set correctly. 
+  
   The server should be ran separately before deploying the service.yaml
   
 
