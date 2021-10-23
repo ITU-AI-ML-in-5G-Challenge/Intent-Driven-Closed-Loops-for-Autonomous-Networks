@@ -15,7 +15,8 @@ To run the example, make sure the xopera orchestrator is installed
 
 Note:
   Ensure that all the directory paths in the create, create_model_node and create_sink_node are set correctly. 
-  
+  Ensure that docker is installed [https://docs.docker.com/engine/install/ubuntu/]
   The server should be ran separately before deploying the service.yaml
+  
   
 
