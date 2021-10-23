@@ -14,7 +14,7 @@ To run the example, make sure the xopera orchestrator is installed
 4. To undeploy all nodes: <code>opera undeploy</code>
 
 Note:
-  Ensure that all the directory paths are set correctly. 
+  Ensure that all the directory paths in the create, create_model_node and create_sink_node are set correctly. 
   
   The server should be ran separately before deploying the service.yaml
   
