@@ -9,7 +9,7 @@ The demo server is shown in the server.py
 
 To run the example, make sure the xopera orchestrator is installed
 1. <code>python3 server.py</code> << ensure that flask and flask_restful are installed >>
-2.  Deploy service node: <code>opera deploy service.yaml</code> . [See output here Output](https://drive.google.com/file/d/1T5ZpezrRbYrVNXDSysYlGHZe3hllKev0/view?usp=sharing)
+2.  Deploy service template: <code>opera deploy service.yaml -c </code> . [See output here Output](https://drive.google.com/file/d/1T5ZpezrRbYrVNXDSysYlGHZe3hllKev0/view?usp=sharing)
 3. To view outputs: <code>opera outputs</code> [See output here Output](https://drive.google.com/file/d/1n8_WjGckx6LRncqKeWghUKhfAE75qfw6/view?usp=sharing)
 4. To undeploy all nodes: <code>opera undeploy</code>
 
