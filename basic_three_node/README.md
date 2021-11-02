@@ -13,7 +13,7 @@ To run the example, make sure the xopera orchestrator is installed
 4. Login as root user [sudo -s]
 5.  Activate the virtual enviroment where the xopera is installed
 6.  Deploy service template: <code>opera deploy service.yaml -c </code>. ![image](https://user-images.githubusercontent.com/53085242/139952222-5f69b66d-eaee-4d0e-a943-ca51081f27af.png)
-8. To view outputs: <code>opera outputs</code> [See output here Output](https://drive.google.com/file/d/1n8_WjGckx6LRncqKeWghUKhfAE75qfw6/view?usp=sharing)
+8. To view outputs: <code>opera outputs</code> [See output here Output](https://drive.google.com/file/d/1n8_WjGckx6LRncqKeWghUKhfAE75qfw6/view?usp=sharing) After deploying, three json files (source_api.json, model_api.json and sink_api.json)  containing the REST APIs. Also, three docker containers are created from each node, which uses the API provided by each node.
 9. To undeploy all nodes: <code>opera undeploy</code>
 
 Note:
