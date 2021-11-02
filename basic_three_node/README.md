@@ -1,22 +1,26 @@
-# Basic 4 node intent, to create and parse.
+# Basic 3 node intent, to create and parse.
 
-SRC node : source of data. Represented by a REST API which gives data (in a predetermined format). This dummy data is represented by a dummy 3V sample data *(
+SRC node : source of data. Represented by a REST API which gives data (in a predetermined format). This dummy data is represented by a dummy 3Vs sample data *(
 input/metadata.csv)* The URL is used in the ansible enviroment to download the dummy data from a demo server using a GET  request.
 Model node: the URL to download the AI/ML Model. POST command to download the model. The url is used in the ansible environment to download a demo h5 model. *(input/model.h5)* It depends on the source node and is hosted on the workstation node.
 SINK node: sink for applying inference.it depends on the model node. It is represented by a REST API which will set values (UE UP throughput and UE DOWN throughput values).  
 
-The demo server is shown in the server.py
 
 To run the example, make sure the xopera orchestrator is installed
-1. <code>python3 server.py</code> << ensure that flask and flask_restful are installed >>
-2.  Deploy service template: <code>opera deploy service.yaml -c </code> . [See output here Output](https://drive.google.com/file/d/1T5ZpezrRbYrVNXDSysYlGHZe3hllKev0/view?usp=sharing)
-3. To view outputs: <code>opera outputs</code> [See output here Output](https://drive.google.com/file/d/1n8_WjGckx6LRncqKeWghUKhfAE75qfw6/view?usp=sharing)
-4. To undeploy all nodes: <code>opera undeploy</code>
+1. 	Clone the repo https://github.com/gblessed/Intent-Driven-Closed-Loops-.git
+2.	Install xopera [https://github.com/xlab-si/xopera-opera], docker for ubuntu[https://docs.docker.com/engine/install/ubuntu/] and docker module in python3 [pip install docker]
+3. Change all directory paths in the playbooks folder to create.yaml, create-model-node.yaml and create-sink-node.yaml files to the correct paths in your storage location. ![image](https://user-images.githubusercontent.com/53085242/139949917-33738cab-e6b4-46ca-ab77-6fdb17d088a3.png)
+4. Login as root user [sudo -s]
+5.  Activate the virtual enviroment where the xopera is installed
+6.  Deploy service template: <code>opera deploy service.yaml -c </code>. ![image](https://user-images.githubusercontent.com/53085242/139952222-5f69b66d-eaee-4d0e-a943-ca51081f27af.png)
+8. To view outputs: <code>opera outputs</code> [See output here Output](https://drive.google.com/file/d/1n8_WjGckx6LRncqKeWghUKhfAE75qfw6/view?usp=sharing)
+9. To undeploy all nodes: <code>opera undeploy</code>
 
 Note:
+  A video guide is available in the Team_winest_demo_ITU.rar file
   Ensure that all the directory paths in the create, create_model_node and create_sink_node are set correctly. 
   Ensure that docker is installed [https://docs.docker.com/engine/install/ubuntu/]
-  The server should be ran separately before deploying the service.yaml
+  
   
   
 
