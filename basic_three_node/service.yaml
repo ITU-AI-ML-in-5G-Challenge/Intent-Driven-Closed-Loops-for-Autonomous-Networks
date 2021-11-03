@@ -38,7 +38,7 @@ node_types:
         description: Rest API to post settings
         type: string
         # default: "http://127.0.0.1:5000/data"
-        default: "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv"
+        default: "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv" # dummy url
       my_csv_file_attribute:
         description: demo JSON file contents attribute
         type: string
@@ -68,7 +68,7 @@ node_types:
       download_model:
         description: URL to download ML model
         type: string
-        default: "https://github.com/Shahnawax/HAR-CNN-Keras/blob/master/model.h5"     
+        default: "https://github.com/Shahnawax/HAR-CNN-Keras/blob/master/model.h5"      # dummy h5 model
         # default: "http://127.0.0.1:5000/model"     
         # default: "http://localhost:8080/model1"     
       catalogid:
