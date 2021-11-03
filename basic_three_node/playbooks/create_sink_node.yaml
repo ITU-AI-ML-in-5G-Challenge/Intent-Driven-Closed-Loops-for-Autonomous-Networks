@@ -25,7 +25,7 @@
     # - name: Set JSON file attribute
     #   set_stats:
     #     data:
-    #       my_json_file_attribute: "{{ json_file_contents.stdout }}"
+    #       my_csv_file_attribute: "{{ json_file_contents.stdout }}"
     # - uri: 
     #     url: "{{ link_for_download }}"
     #     method: POST

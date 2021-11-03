@@ -8,9 +8,9 @@ node_types:
       rest_api_attribute:
         description: Rest API to fetch data 
         type: string
-        default: "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv"       
+        default: "https://drive.google.com/uc?export=download&id=1zWzCoVV8DNir0zSDVzl5WToWD729yngy"       
         # default: "http://localhost:8080/data1.csv"     
-      my_json_file_attribute:
+      my_csv_file_attribute:
         description: demo JSON file contents attribute
         type: string
     properties:
@@ -39,7 +39,7 @@ node_types:
         type: string
         # default: "http://127.0.0.1:5000/data"
         default: "https://gist.githubusercontent.com/jay0lee/90b17abb4b4bf89df39a025b4540491c/raw/095f2fe66a44a60efc792481798ed3e766b5db25/users.csv"
-      my_json_file_attribute:
+      my_csv_file_attribute:
         description: demo JSON file contents attribute
         type: string
     properties:
@@ -149,9 +149,9 @@ topology_template:
     output_src_URI:
       description: Rest API to fetch data
       value: { get_attribute: [ source_node, rest_api_attribute ] }
-    output_attribute_json_file:
+    output_attribute_csv_file:
       description: Sample source data 
-      value: { get_attribute: [ source_node, my_json_file_attribute ] }
+      value: { get_attribute: [ source_node, my_csv_file_attribute ] }
     output_solution_id:
       description: Solution ID
       value: { get_attribute: [ ml_node, solutionid ] }

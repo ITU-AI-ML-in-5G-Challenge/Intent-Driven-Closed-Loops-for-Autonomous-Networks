@@ -29,13 +29,14 @@
     - name: Set JSON file attribute
       set_stats:
         data:
-          my_json_file_attribute: "{{ json_file_contents.stdout }}"
+          my_csv_file_attribute: "{{ json_file_contents.stdout }}"
 
     - name: Download demo input data
       get_url:
         url: "{{link_for_download}}"
-        dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/files/metadata.csv
-        mode: '0777'
+        dest: /home/blessed/Downloads/Intent-Driven-Closed-Loops--main/basic_three_node/files/
+        # mode: '0777'
+        # state: touch
 
 
 
