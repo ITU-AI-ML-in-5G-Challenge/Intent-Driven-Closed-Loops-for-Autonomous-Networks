@@ -8,7 +8,7 @@ SINK node: sink for applying inference.it depends on the model node. It is repre
 
 To run the example, make sure the xopera orchestrator is installed
 1. 	Clone the repo https://github.com/gblessed/Intent-Driven-Closed-Loops-.git
-2.	Install xopera [https://github.com/xlab-si/xopera-opera], docker for ubuntu[https://docs.docker.com/engine/install/ubuntu/] and docker module in python3 [pip install docker]
+2.	Install xopera [here](https://github.com/xlab-si/xopera-opera), docker for ubuntu [here](https://docs.docker.com/engine/install/ubuntu/) and docker module in python3 [pip install docker]
 3. Change all directory paths in the playbooks folder to create.yaml, create-model-node.yaml and create-sink-node.yaml files to the correct paths in your storage location. ![image](https://user-images.githubusercontent.com/53085242/139949917-33738cab-e6b4-46ca-ab77-6fdb17d088a3.png)
 4. Login as root user [sudo -s]
 5.  Activate the virtual enviroment where the xopera is installed
@@ -17,9 +17,9 @@ To run the example, make sure the xopera orchestrator is installed
 9. To undeploy all nodes: <code>opera undeploy</code>
 
 Note:
-  A video guide is available in the Team_winest_demo_ITU.rar file
+  A video guide is available in the Team_winest_demo_ITU.rar [here](https://github.com/gblessed/Intent-Driven-Closed-Loops-/blob/main/basic_three_node/Team_winest_demo_ITU.rar)
   Ensure that all the directory paths in the create, create_model_node and create_sink_node are set correctly. 
-  Ensure that docker is installed [https://docs.docker.com/engine/install/ubuntu/]
+  Ensure that docker is installed [link](https://docs.docker.com/engine/install/ubuntu/)
   
   
   
